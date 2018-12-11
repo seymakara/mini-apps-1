@@ -1,2 +1,25 @@
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CSV Report Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="app.js"></script>
+</head>
 
+<body>
+    <div id="wrapper" style="font-family: arial, sans-serif">
+        <h1>CSV Report Generator</h1>
+        <form action="/upload_json" method="POST">
+            <p>Write your JSON text to the area below</p>
+            <textarea name="jsonText" id="jsonText" cols="75" rows="20"></textarea>
+            <input type="submit" value="CONVERT">
+        </form>
+    </div>
+    <div id="displayCSV">
+        <p>Display CSV here</p>
 
+    </div>
+</body>
+
+</html>

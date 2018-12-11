@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "express": "^4.16.4",
+    "nodemon": "^1.18.8"
+  },
+  "name": "challenge_1",
+  "version": "1.0.0",
+  "main": "app-1.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
