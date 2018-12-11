@@ -1,6 +1,10 @@
 var xFlag = true;
 var counter = 0;
 var ifwin = false;
+var lastWinner;
+var player1 = "X"
+var player2 = "O"
+
 
 var winCheck = function () {
 
@@ -43,8 +47,10 @@ function stopGame() {
         announce.innerText = "No winners! It is a tie!";
     } else if (counter % 2 === 1 && ifwin === true) {
         announce.innerText = "Congrats! Player 1 wins!!!";
+        lastWinner = player1;
     } else if (counter % 2 === 0 && ifwin === true) {
         announce.innerText = "Congrats! Player 2 wins!!!";
+        lastWinner = player2;
     }
 }
 function addX(id) {
@@ -52,10 +58,10 @@ function addX(id) {
 
     if (cell.innerHTML === "&nbsp;") {
         if (xFlag) {
-            cell.innerText = "X"
+            cell.innerText = player1
             xFlag = false;
         } else {
-            cell.innerText = "O"
+            cell.innerText = player2
             xFlag = true;
         }
         counter++
@@ -82,6 +88,13 @@ function resetGame() {
     announce.innerText = '';
     counter = 0;
     ifwin = false;
+    // xFlag = true;
+
+    if (lastWinner === player1) {
+        xFlag = true;
+    } else if (lastWinner === player2) {
+        xFlag = false;
+    }
 
 }
 
