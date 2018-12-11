@@ -30,7 +30,7 @@ var winCheck = function () {
         if (winningOptions[option]) {
             ifwin = true;
             stopGame()
-        } else {
+        } else if (counter === 9) {
             ifwin = false;
             stopGame()
         }
@@ -81,6 +81,7 @@ function resetGame() {
 
     announce.innerText = '';
     counter = 0;
+    ifwin = false;
 
 }
 
