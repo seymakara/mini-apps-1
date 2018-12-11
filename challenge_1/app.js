@@ -30,22 +30,27 @@ var winCheck = function () {
         if (winningOptions[option]) {
             ifwin = true;
             stopGame()
+        } else {
+            ifwin = false;
+            stopGame()
         }
     }
 }
 
 function stopGame() {
     var announce = document.getElementById('result')
-    if (counter % 2 === 1) {
+    if (counter === 9 && ifwin === false) {
+        announce.innerText = "No winners! It is a tie!";
+    } else if (counter % 2 === 1 && ifwin === true) {
         announce.innerText = "Congrats! Player 1 wins!!!";
-    } else {
+    } else if (counter % 2 === 0 && ifwin === true) {
         announce.innerText = "Congrats! Player 2 wins!!!";
     }
 }
 function addX(id) {
     var cell = document.getElementById(id);
 
-    if (cell.innerText === "") {
+    if (cell.innerHTML === "&nbsp;") {
         if (xFlag) {
             cell.innerText = "X"
             xFlag = false;
@@ -57,7 +62,6 @@ function addX(id) {
     } else {
         alert('Pick an empty square')
     }
-
 }
 
 function play(id) {
@@ -65,7 +69,19 @@ function play(id) {
         addX(id);
         winCheck()
     }
-    winCheck()
+}
+
+function resetGame() {
+    var announce = document.getElementById('result')
+    var cells = document.querySelectorAll('.cells');
+
+    cells.forEach(cell => {
+        cell.innerHTML = "&nbsp;"
+    })
+
+    announce.innerText = '';
+    counter = 0;
+
 }
 
 
