@@ -7,8 +7,8 @@
     <title>CSV Report Generator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
-    <script src="app.js"></script>
-    <script src="ejs.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type='text/javascript' src='/app.js'></script>
 </head>
 
 <body>
@@ -19,6 +19,17 @@
             <textarea name="jsonText" id="jsonText" cols="75" rows="20"></textarea>
             <input type="submit" value="CONVERT">
         </form>
+        or
+
+        <form method="post" id="fileinfo" name="fileinfo" onsubmit="return submitForm();">
+            <label>Select a file:</label><br>
+            <input type="file" name="file" required />
+            <input type="submit" value="Upload" />
+        </form>
+        <div id="output"></div>
+
+
+
         <div id="displayCSV">
             <h1>Display CSV here</h1>
             <p>

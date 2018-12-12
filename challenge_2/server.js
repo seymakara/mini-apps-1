@@ -3,7 +3,7 @@ const port = 3000;
 const app = express();
 const bodyParser = require('body-parser');
 
-app.use(express.static('/client'));
+app.use(express.static('./client'));
 app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(bodyParser());
@@ -15,7 +15,9 @@ app.get('/', (req, res) => res.render('index.ejs', { column: '', rows: '' }));
 app.post('/', function (req, res) {
 
     var data = JSON.parse(req.body.jsonText)
-    var keyNames = Object.keys(data).join()
+    var keys = Object.keys(data)
+    keys.pop()
+    var keyNames = keys.join();
     var keyValues = []
 
     var CSVparser = function (obj) {
@@ -36,12 +38,13 @@ app.post('/', function (req, res) {
 
     CSVparser(data);
 
-    console.log('\n\n\n keyvalues ', keyNames, '\n\n\n')
-
     res.render('index.ejs', { column: keyNames, rows: keyValues })
 })
 
 
+app.post('/upload', function (req, res) {
+    res.send("File is uploaded");
+})
 
 app.listen(port, function () {
     console.log(`Server is running on ${port} port`)
