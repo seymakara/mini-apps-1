@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
     <script src="app.js"></script>
-    <!-- <script src="ejs.js"></script> -->
+    <script src="ejs.js"></script>
 </head>
 
 <body>
@@ -22,8 +22,11 @@
         <div id="displayCSV">
             <h1>Display CSV here</h1>
             <p>
+                <%= column %> <br>
+                <% for(var i=0; i < rows.length; i++) {%>
+                <%= rows[i] %> <br>
+                <% } %>
             </p>
-
         </div>
     </div>
 </body>

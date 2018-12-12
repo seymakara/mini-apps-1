@@ -10,18 +10,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // app.use(bodyParser.json()) //difference between them?
 
-app.get('/', (req, res) => res.render('index.ejs'));
+app.get('/', (req, res) => res.render('index.ejs', { column: '', rows: '' }));
 
 app.post('/', function (req, res) {
 
     var data = JSON.parse(req.body.jsonText)
-    var keyNames = Object.keys(data)
+    var keyNames = Object.keys(data).join()
     var keyValues = []
 
     var CSVparser = function (obj) {
+        var valueArr = []
         for (key in obj) {
             if (key !== 'children') {
-                keyValues.push(obj[key]);
+                valueArr.push(obj[key])
             } else {
                 if (obj.children.length !== 0) {
                     for (var i = 0; i < obj.children.length; i++) {
@@ -30,10 +31,14 @@ app.post('/', function (req, res) {
                 }
             }
         }
+        keyValues.push([valueArr.join()]);
     }
+
     CSVparser(data);
 
-    res.render('index.ejs', { column: keyNames, row: keyValues })
+    console.log('\n\n\n keyvalues ', keyNames, '\n\n\n')
+
+    res.render('index.ejs', { column: keyNames, rows: keyValues })
 })
 
 
