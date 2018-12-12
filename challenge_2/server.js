@@ -3,29 +3,37 @@ const port = 3000;
 const app = express();
 const bodyParser = require('body-parser');
 
-app.use(express.static('client'))
-app.use(bodyParser());
+app.use(express.static('/client'));
+app.set('view engine', 'ejs')
+app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser());
+
 // app.use(bodyParser.json()) //difference between them?
 
-app.get('/', (req, res) => console.log('request received'));
+app.get('/', (req, res) => res.render('index.ejs'));
 
 app.post('/', function (req, res) {
-    console.log(req.body)
+
     var data = JSON.parse(req.body.jsonText)
-    var keyNames = []
+    var keyNames = Object.keys(data)
     var keyValues = []
-    for (key in data) {
-        if (key !== 'children') {
-            keyNames.push(key);
+
+    var CSVparser = function (obj) {
+        for (key in obj) {
+            if (key !== 'children') {
+                keyValues.push(obj[key]);
+            } else {
+                if (obj.children.length !== 0) {
+                    for (var i = 0; i < obj.children.length; i++) {
+                        CSVparser(obj.children[i])
+                    }
+                }
+            }
         }
     }
-    for (key in data) {
-        if (key !== 'children') {
-            keyValues.push(data[key]);
-        }
-    }
-    var data = (keyNames.join() + '\n' + keyValues.join() + '\n');
-    res.send(data)
+    CSVparser(data);
+
+    res.render('index.ejs', { column: keyNames, row: keyValues })
 })
 
 
