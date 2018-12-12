@@ -5,10 +5,30 @@ const bodyParser = require('body-parser');
 
 app.use(express.static('client'))
 app.use(bodyParser());
+// app.use(bodyParser.json()) //difference between them?
 
-app.post('/upload_json', function (req, res) {
+app.get('/', (req, res) => console.log('request received'));
+
+app.post('/', function (req, res) {
     console.log(req.body)
+    var data = JSON.parse(req.body.jsonText)
+    var keyNames = []
+    var keyValues = []
+    for (key in data) {
+        if (key !== 'children') {
+            keyNames.push(key);
+        }
+    }
+    for (key in data) {
+        if (key !== 'children') {
+            keyValues.push(data[key]);
+        }
+    }
+    var data = (keyNames.join() + '\n' + keyValues.join() + '\n');
+    res.send(data)
 })
+
+
 
 app.listen(port, function () {
     console.log(`Server is running on ${port} port`)
