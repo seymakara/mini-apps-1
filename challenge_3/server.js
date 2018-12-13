@@ -2,6 +2,7 @@ const express = require('express')
 const port = 3000;
 const app = express();
 const bodyParser = require('body-parser')
+var db = require('./server/db');
 
 // app.use(bodyParser());
 app.use(express.static('./public'))
